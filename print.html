@@ -1,0 +1,357 @@
+<!DOCTYPE HTML>
+<html lang="zh" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Valyria 用户手册</title>
+        <meta name="robots" content="noindex" />
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="intro.html"><strong aria-hidden="true">1.</strong> 开始之前</a></li><li class="chapter-item expanded "><a href="concept.html"><strong aria-hidden="true">2.</strong> 基础概念</a></li><li class="chapter-item expanded "><a href="rules.html"><strong aria-hidden="true">3.</strong> 游戏规则</a></li><li class="chapter-item expanded "><a href="script-api.html"><strong aria-hidden="true">4.</strong> 脚本 API</a></li><li class="chapter-item expanded "><a href="script-dev.html"><strong aria-hidden="true">5.</strong> 脚本开发环境</a></li><li class="chapter-item expanded "><a href="custom.html"><strong aria-hidden="true">6.</strong> 自定义对局</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Valyria 用户手册</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="开始之前"><a class="header" href="#开始之前">开始之前</a></h1>
+<p>在这里，我们将向你介绍 Valyria 的基础概念、游戏规则以及最重要的：如何编写一个 Valyria 脚本。</p>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="基础概念"><a class="header" href="#基础概念">基础概念</a></h1>
+<h2 id="时间概念"><a class="header" href="#时间概念">时间概念</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>种类</th><th>描述</th></tr></thead><tbody>
+<tr><td>刻 (tick)</td><td>所有游戏的操作和事件的最基本时间单位，每刻中允许且只允许单一玩家操作</td></tr>
+<tr><td>轮 (round)</td><td>每 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">50</span></span></span></span> 刻称为一轮</td></tr>
+</tbody></table>
+</div>
+<h2 id="实体概念"><a class="header" href="#实体概念">实体概念</a></h2>
+<h3 id="士兵-soldier"><a class="header" href="#士兵-soldier">士兵 (soldier)</a></h3>
+<p>士兵：每个地图格上的数字表示士兵数量。</p>
+<h3 id="地图格-grid"><a class="header" href="#地图格-grid">地图格 (grid)</a></h3>
+<p>地图格：每场游戏指定一张地图 (map)，由 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 行 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span> 列地图格组成。</p>
+<div class="table-wrapper"><table><thead><tr><th>种类</th><th>描述</th></tr></thead><tbody>
+<tr><td>王冠 (crown)</td><td>一类地图格，每个玩家出生点，每个玩家有且仅有一个王冠，每一刻开始时为拥有玩家产生数量为 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 的士兵，被敌方占领即失败游戏结束</td></tr>
+<tr><td>城堡 (castle)</td><td>一类地图格，初始时有一定量中立士兵，玩家占领后每一刻开始时为拥有玩家产生数量为 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 的士兵</td></tr>
+<tr><td>山地 (mountain)</td><td>一类地图格，玩家不可占领</td></tr>
+<tr><td>空地 (vacance)</td><td>一类地图格，未被任何一个玩家占领，初始时除王冠城堡山地均为空地</td></tr>
+<tr><td>领地 (land)</td><td>玩家已占领的地图格</td></tr>
+</tbody></table>
+</div>
+<h3 id="战争迷雾-fog-of-war"><a class="header" href="#战争迷雾-fog-of-war">战争迷雾 (Fog of War)</a></h3>
+<p>视野 (visual field)：玩家己方领地以及所有己方领地相邻的八个地图格的地图格并集。在此集合的地图格内，玩家可以观察到每一刻的己方/敌方士兵数量变化、领地变化、占领情况等。</p>
+<p>战争迷雾：不属于视野的地图格，称为处于战争迷雾中。</p>
+<p>处于战争迷雾的城堡/山地，均显示为山地；其余处于战争迷雾的地图格，均显示为空地。</p>
+<h3 id="排行榜-ranking-list"><a class="header" href="#排行榜-ranking-list">排行榜 (Ranking List)</a></h3>
+<p>排行榜：包含所有玩家的士兵数量以及领地数量，作为接口提供给玩家。</p>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="游戏规则"><a class="header" href="#游戏规则">游戏规则</a></h1>
+<p>每场游戏指定一张地图 (map)，由 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">n</span></span></span></span> 行 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span> 列地图格组成。</p>
+<h2 id="先后手确定规则"><a class="header" href="#先后手确定规则">先后手确定规则</a></h2>
+<p>每 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span> 刻开始时，对所有玩家随机分配一个优先级权重（不可重复），由优先级高的玩家先操作。
+优先级权重不作为接口提供给玩家。</p>
+<h2 id="游戏操作"><a class="header" href="#游戏操作">游戏操作</a></h2>
+<p>以下讨论的操作<strong>均</strong>不能越过地图边界。</p>
+<h3 id="移动"><a class="header" href="#移动">移动</a></h3>
+<p>每刻开始时，玩家选择一个士兵数量为 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace"> </span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mclose">)</span></span></span></span> 的己方领地，则玩家可选的移动操作有：</p>
+<ol>
+<li>移动 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 个士兵到上下左右相邻的地图格</li>
+<li>移动 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">⌊</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord">/2</span><span class="mclose">⌋</span></span></span></span> 个士兵到上下左右相邻的地图格</li>
+</ol>
+<p>设移动的士兵数量为 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span>，当前己方领地士兵数量变为 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span>。</p>
+<p>若移动到：</p>
+<ol>
+<li>山地，则移动失败，山地地图格不可占领。</li>
+<li>己方领地，设己方领地原有士兵数量为 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">a</span></span></span></span>，则己方领地此时士兵数量变为 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">a</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span>。</li>
+<li>非己方领地非山地地图格，开始占领操作。</li>
+</ol>
+<h4 id="合法性"><a class="header" href="#合法性">合法性</a></h4>
+<p>若选择的己方领地士兵数量 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span></span></span></span> 满足 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7335em;vertical-align:-0.0391em;"></span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 并且移动到的地图格满足：</p>
+<ol>
+<li>位于地图范围内：设坐标为 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span>，则 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7804em;vertical-align:-0.136em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.7719em;vertical-align:-0.136em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">n</span><span class="mpunct">,</span><span class="mspace"> </span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">1</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8304em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">y</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">m</span></span></span></span>。</li>
+<li>不是山地地图格。</li>
+</ol>
+<p>视为移动合法，否则移动不合法。</p>
+<h3 id="占领"><a class="header" href="#占领">占领</a></h3>
+<p>设移动的士兵数量为 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span>，当士兵移动到以下非己方领地非山地地图格时：</p>
+<ol>
+<li>空地：占领，成为玩家领地。</li>
+<li>城堡：设城堡士兵数量为 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span>
+若 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8879em;vertical-align:-0.136em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≤</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span>，则占领失败，此时城堡士兵数量变为 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span>（注意 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6667em;vertical-align:-0.0833em;"></span><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">0</span></span></span></span> 同时未被占领是合法的），原移动的 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.7519em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span></span></span></span> 个士兵被消灭。
+若 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.791em;vertical-align:-0.0391em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span>，则占领，将城堡变为己方领地，此时城堡士兵数量 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span> 变为 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8352em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.7519em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">′</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span>。</li>
+<li>王冠：继承占领城堡规则。
+当玩家 PlayerA 的王冠被玩家 PlayerB 占领时，PlayerA 剩余所有领地均变为 PlayerB 领地，设 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 为 PlayerA 第 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6595em;"></span><span class="mord mathnormal">i</span></span></span></span> 块领地的士兵数量，<span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span> 变为 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">⌊</span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em;"><span style="top:-2.55em;margin-left:-0.0315em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord">/2</span></span><span class="mclose">⌋</span></span></span></span>。</li>
+</ol>
+<h2 id="游戏结束条件"><a class="header" href="#游戏结束条件">游戏结束条件</a></h2>
+<p>当己方王冠被其他玩家占领，即失败。
+当其他所有玩家均已失败，即胜利。
+除此之外，一局游戏时间上限为 GameRoundLimit 刻，若已进行了 GameRoundLimit 刻，则将所有玩家按士兵数量为第一关键字，领地数量为第二关键字，玩家 id 为第三关键字排序，第一位的玩家胜利，其余玩家失败。</p>
+<h2 id="士兵产生规则"><a class="header" href="#士兵产生规则">士兵产生规则</a></h2>
+<ol>
+<li>每个王冠/已被占领的城堡每刻开始时产生数量为 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 的士兵。</li>
+<li>每轮开始时每个领地产生数量为 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> 士兵。</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="脚本-api"><a class="header" href="#脚本-api">脚本 API</a></h1>
+<p>为实现模拟器与脚本的交互，我们定义了以下数据格式</p>
+<pre><code class="language-ts">// 地图格类型
+// 分别代表：红方王冠、蓝方王冠、中立城堡、红方城堡、蓝方城堡、山地、空地、红方领地、蓝方领地、战争迷雾中的空地、战争迷雾中的山地
+type GridType = 'R' | 'B' | 'C' | 'CR' | 'CB' | 'M' | 'V' | 'LR' | 'LB' | 'F' | 'MF';
+
+interface MapGrid {
+  type: GridType;
+  soldiers?: number;
+}
+
+// 地图
+interface GameMap {
+  // 宽度
+  width: number;
+  // 高度
+  height: number;
+  // 地图格下标 idx = x * height + y
+  // (x, y 均从 0 开始)
+  grids: MapGrid[];
+}
+</code></pre>
+<p>模拟器将以 <code>Tick(User, GameStat)</code> 的形式调用用户的 <code>Tick</code> 函数，其返回类型应为 <code>MoveAction</code>。</p>
+<p>其中对 <code>User</code>, <code>GameStat</code> 和 <code>MoveAction</code> 的定义如下：</p>
+<pre><code class="language-ts">
+// 表示玩家在当前对局中是哪个颜色
+type User = &quot;R&quot; | &quot;B&quot;;
+
+// 游戏当前状态
+interface GameStat {
+  map: GameMap;
+  enemy_soldiers: number;
+  enemy_lands: number;
+}
+
+// 玩家走步
+interface MoveAction {
+  x: number;
+  y: number;
+  amount: number;
+  // U 表示 y - 1 方向，D 表示 y + 1 方向
+  // L 表示 x - 1 方向，R 表示 x + 1 方向
+  movement: &quot;U&quot; | &quot;D&quot; | &quot;L&quot; | &quot;R&quot;;
+}
+</code></pre>
+<h2 id="限制"><a class="header" href="#限制">限制</a></h2>
+<p><strong>值得注意的是</strong>，为了确保一局游戏的进行时间，我们对<strong>每一刻</strong>脚本运行时间进行了限制：不超过 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">50</span><span class="mord mathnormal">m</span><span class="mord mathnormal">s</span></span></span></span>。</p>
+<p>若你的脚本未能在规定时间内计算出走步<strong>或是</strong>提供的走步并不符合<a href="../simulator/rules">游戏规则</a>，模拟器会认为你的脚本这一刻<strong>没有操作</strong>。</p>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="脚本开发环境"><a class="header" href="#脚本开发环境">脚本开发环境</a></h1>
+<p>Valyria 为用户提供了<strong>全套</strong>的脚本开发环境，以期能为用户提供更好的脚本开发体验。</p>
+<p>当然，如果你的代码水平足够高超的话，你也<strong>可以</strong>跳过这个部分。</p>
+<h2 id="前置"><a class="header" href="#前置">前置</a></h2>
+<p>在开始安装环境前，你/你的系统需要拥有：</p>
+<ul>
+<li>一个支持 JavaScript 的 IDE</li>
+<li>一个 github 账号</li>
+<li>yarn</li>
+</ul>
+<h2 id="安装环境"><a class="header" href="#安装环境">安装环境</a></h2>
+<p>我们已经将所有你将会使用到的打包在一个<a href="https://github.com/TeamNEDP/script-dev">模板</a>里。</p>
+<h4 id="如果你"><a class="header" href="#如果你">如果你</a></h4>
+<p>有将你的脚本上传到 GitHub 的需求，你需要做的只是点击 <code>Use this template</code>，建立一个你的脚本代码仓库。</p>
+<p>（这里应该是一个 .gif 或者是什么的，cyx 说不要是图片）</p>
+<p>之后将你的脚本仓库克隆到本地。</p>
+<h4 id="但如果你"><a class="header" href="#但如果你">但如果你</a></h4>
+<p>没有将你的脚本上传到 GitHub 的需求，你仅需要将包下载到本地即可。</p>
+<p>（这里应该是一个 .gif 或者是什么的，cyx 说不要是图片）</p>
+<p>做完以上工作后，我们在路径下终端输入：</p>
+<pre><code>yarn install
+</code></pre>
+<p>现在你就能在 <code>./src/tick.js</code> 下编写你的 Valyria 脚本。</p>
+<h2 id="开始编写"><a class="header" href="#开始编写">开始编写</a></h2>
+<p>在本环境下，你可以使用 API 相关的类型推断和代码补全。</p>
+<p>但是<strong>更方便</strong>的是，你可以利用 <code>yarn</code> 命令依赖 <code>node</code> 包或是网络上的一些算法实现。</p>
+<p>对于这一特性，这里是一个例子：</p>
+<h3 id="example"><a class="header" href="#example">Example</a></h3>
+<p>假设你需要用到经典的 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.03148em;">ijk</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">a</span></span></span></span> 算法，你进入到了<a href="https://www.npmjs.com/">官网</a>搜索。</p>
+<p>（这里应该是一个 gif）</p>
+<p>从<a href="https://www.npmjs.com/package/dijkstra?activeTab=readme">官网</a>上你得知可以通过 <code>yarn add dijkstra</code> 安装这一实现，于是你在控制台输入：</p>
+<pre><code>yarn add dijkstra
+</code></pre>
+<p>现在你在 <code>tick.js</code> 里就能使用 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.03148em;">ijk</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">a</span></span></span></span> 相关内容了。</p>
+<p>（这里应该是一个代码补全的 gif）</p>
+<h2 id="打包输出"><a class="header" href="#打包输出">打包输出</a></h2>
+<p>现在你完成了你的 Valyria 脚本，现在你要将它打包为可以上传到 Valyria 脚本仓库的脚本，在终端输入：</p>
+<pre><code>yarn build
+</code></pre>
+<p>这时你的脚本就会打包输出到 <code>./main.js</code> 里，将其中内容上传到 Valyria 脚本仓库就完成了一个开发过程。</p>
+<div style="break-before: page; page-break-before: always;"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css" integrity="sha384-AfEj0r4/OFrOo5t7NnNe46zW/tFgW6x/bCJG8FqQCEo3+Aro6EYUG4+cU+KJWu/X" crossorigin="anonymous">
+<h1 id="自定义对局"><a class="header" href="#自定义对局">自定义对局</a></h1>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </body>
+</html>
