@@ -154,29 +154,29 @@
 </ul>
 <h2 id="安装环境"><a class="header" href="#安装环境">安装环境</a></h2>
 <p>我们已经将所有你将会使用到的打包在一个<a href="https://github.com/TeamNEDP/script-dev">模板</a>里。</p>
-<h4 id="如果你"><a class="header" href="#如果你">如果你</a></h4>
+<h3 id="如果你"><a class="header" href="#如果你">如果你</a></h3>
 <p>有将你的脚本上传到 GitHub 的需求，你需要做的只是点击 <code>Use this template</code>，建立一个你的脚本代码仓库。</p>
-<p>（这里应该是一个 .gif 或者是什么的，cyx 说不要是图片）</p>
+<p><img src="./githubnew.gif" alt="githubnew.gif" /></p>
 <p>之后将你的脚本仓库克隆到本地。</p>
-<h4 id="但如果你"><a class="header" href="#但如果你">但如果你</a></h4>
+<h3 id="但如果你"><a class="header" href="#但如果你">但如果你</a></h3>
 <p>没有将你的脚本上传到 GitHub 的需求，你仅需要将包下载到本地即可。</p>
-<p>（这里应该是一个 .gif 或者是什么的，cyx 说不要是图片）</p>
+<p><img src="./githubdownload.gif" alt="githubdownload.gif" /></p>
 <p>做完以上工作后，我们在路径下终端输入：</p>
 <pre><code>yarn install
 </code></pre>
-<p>现在你就能在 <code>./src/tick.js</code> 下编写你的 Valyria 脚本。</p>
+<p>现在你就能在 <code>./src/tick.ts</code> 下编写你的 Valyria 脚本。</p>
 <h2 id="开始编写"><a class="header" href="#开始编写">开始编写</a></h2>
 <p>在本环境下，你可以使用 API 相关的类型推断和代码补全。</p>
 <p>但是<strong>更方便</strong>的是，你可以利用 <code>yarn</code> 命令依赖 <code>node</code> 包或是网络上的一些算法实现。</p>
 <p>对于这一特性，这里是一个例子：</p>
 <h3 id="example"><a class="header" href="#example">Example</a></h3>
 <p>假设你需要用到经典的 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.03148em;">ijk</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">a</span></span></span></span> 算法，你进入到了<a href="https://www.npmjs.com/">官网</a>搜索。</p>
-<p>（这里应该是一个 gif）</p>
+<p><img src="./tonpm.gif" alt="tonpm" /></p>
 <p>从<a href="https://www.npmjs.com/package/dijkstra?activeTab=readme">官网</a>上你得知可以通过 <code>yarn add dijkstra</code> 安装这一实现，于是你在控制台输入：</p>
 <pre><code>yarn add dijkstra
 </code></pre>
 <p>现在你在 <code>tick.js</code> 里就能使用 <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.03148em;">ijk</span><span class="mord mathnormal">s</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">a</span></span></span></span> 相关内容了。</p>
-<p>（这里应该是一个代码补全的 gif）</p>
+<p><img src="./scripting.gif" alt="scripting.gif" /></p>
 <h2 id="打包输出"><a class="header" href="#打包输出">打包输出</a></h2>
 <p>现在你完成了你的 Valyria 脚本，现在你要将它打包为可以上传到 Valyria 脚本仓库的脚本，在终端输入：</p>
 <pre><code>yarn build
